@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= locals.title %></title>
+    <link rel="stylesheet" href="/css/home.css" />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="main_container">
+      <div class="main_header">
+        <span>Daily Tasks App</span>
+      </div>
+      <form action="/create-task" method="post">
+        <div class="description">
+          <label for="">DESCRIPTION</label>
+          <input
+            type="text"
+            name="description"
+            placeholder="What do you want to do?"
+          />
+        </div>
+        <div class="catagory_date_container">
+          <div class="category_div">
+            <label>CATEGORY</label>
+            <select name="category">
+              <option value="" disabled selected>Choose a category</option>
+              <option value="PERSONAL">Personal</option>
+              <option value="WORK">Work</option>
+              <option value="SCHOOL">School</option>
+              <option value="CLEANING">Cleaning</option>
+              <option value="EXCERCISE">Excercise</option>
+              <option value="OTHER">Other</option>
+            </select>
+          </div>
+          <div class="date_div">
+            <label for="date">DUE DATE</label>
+            <input type="date" name="date" />
+          </div>
+        </div>
+        <div class="buttons_container">
+          <div class="add_task">
+            <i class="fas fa-plus"></i>
+            <button type="submit">ADD TASK</button>
+          </div>
+          <div class="delete_task">
+            <i class="fas fa-trash-alt"></i>
+            <button formaction="/delete-task" type="submit">DELETE TASK</button>
+          </div>
+        </div>
+        <div class="task_display_container">
+          <% for(let i of task_list){ %>
+          <div class="task_list_element">
+            <div class="left_content">
+              <div class="checkbox_element">
+                <input type="checkbox" name="check" value="<%= i._id %>" />
+              </div>
+              <div class="task_description">
+                <div class="task_text">
+                  <span><%= i.description %></span>
+                </div>
+                <div class="task_icon_date">
+                  <div class="task_icon">
+                    <i class="fas fa-calendar-week"></i>
+                  </div>
+                  <div class="task_date"><span><%= i.date %></span></div>
+                </div>
+              </div>
+            </div>
+            <div class="task_button">
+              <button><span><%= i.category %></span></button>
+            </div>
+          </div>
+          <% } %>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
